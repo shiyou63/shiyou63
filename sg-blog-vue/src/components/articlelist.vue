@@ -29,8 +29,8 @@
         :key="'article'+index"
       >
         <!-- 添加置顶角标 -->
-        <div v-if="item.isTop" class="top-corner">顶置</div>
-            <span class="s-round-date">
+        <div v-if="item.isTop === 1" class="top-corner">TOP</div>
+        <span class="s-round-date">
                 <span class="month" v-html="showInitDate(item.createTime,'month')+'月'"></span>
                 <span class="day" v-html="showInitDate(item.createTime,'date')"></span>
             </span>
@@ -152,15 +152,15 @@ export default {
 </script>
 <style scoped>
 .top-corner {
-position: absolute;
-top: 5px;
-right: 5px;
-background: #ff4d4f;
-color: white;
-padding: 2px 8px;
-border-radius: 3px;
-font-size: 12px;
-z-index: 2;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #ff4d4f;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  z-index: 2;
 }
 @media (min-width: 926px) {
   .article-search {
@@ -176,17 +176,24 @@ z-index: 2;
     display: none;
   }
 }
-/*分享标题*/
-.shareTitle{
-  margin-bottom: 40px;
-  position: relative;
-  border-radius: 5px;
-  background: #fff;
-  padding:15px;
+/* 添加或修改顶置角标样式 */
+.top-corner {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #ff4d4f;  /* 更醒目的颜色 */
+  color: white;
+  padding: 2px 8px;
+  font-size: 12px;
+  border-radius: 0 4px 0 4px;  /* 圆角方向调整 */
+  z-index: 1;
 }
-.shareclassTwo{
-  width:100%;
+
+/* 确保父容器允许绝对定位 */
+.s-item.tcommonBox {
+  position: relative;  /* 新增，确保角标相对于此容器定位 */
 }
+
 .shareclassTwo li{
   display: inline-block;
 }
@@ -214,7 +221,4 @@ z-index: 2;
   transition: all 0.5s ease-out;
   font-size: 15px;
 }
-/*.sharelistBox .viewmore a:hover,.s-item .viewdetail a:hover{
-    background: #48456C;
-}*/
 </style>
